@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;;
 
+use App\Jobs\CreateAcountJob;
 use App\Models\Account;
 use App\Services\AccountService;
 use Illuminate\Http\Request;
@@ -86,6 +87,7 @@ class AccountController extends Controller
         }
         $result = $this->accountService->createAccount($request->all());
         if($result){
+            CreateAcountJob::dispatch($result);
             return response()->json(["message" => "Thêm tài khoản thành công", "data" => $result], 200);
         }   else {
             return response()->json(["message" => "Thêm tài khoản thất bại"], 500);
