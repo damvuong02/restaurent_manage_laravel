@@ -28,6 +28,6 @@ class CreateAcountJob implements ShouldQueue
     public function handle(): void
     {
         //
-        CreateAcount::dispatch("hehe");
+        CreateAcount::dispatch($this->account);
     }
 }
